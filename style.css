@@ -174,16 +174,16 @@ button.secondary {
 .card {
     background: var(--white); 
     border: 1px solid #eee; 
-    border-left: 5px solid var(--farmzy-green);
+    border-left: 5px solid var(--farmzy-green); /* Branded accent */
     border-radius: 14px;
-    padding: 0; /* Changed to 0 for better padding control */
+    padding: 15px; 
     margin-bottom: 15px; 
     box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    
-    /* THE IMPORTANT CHANGES */
-    opacity: 0; 
-    animation: zoomIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    animation: slideDown 0.6s ease-out;
+    animation-fill-mode: both;
+    transition: filter 0.3s ease;
 }
+
 .card:hover {
     filter: drop-shadow(10px 10px 20px rgba(36, 36, 36, 0.5));
 }

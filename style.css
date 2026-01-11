@@ -1,0 +1,455 @@
+/* Farmzy Brand Theme - Mobile First */
+:root {
+    --farmzy-green: #7eb356;      /* Main Logo Green */
+    --farmzy-dark: #5a823d;       /* Darker Foliage Green */
+    --farmzy-cream: #f4eee1;      /* Logo Background Cream */
+    --farmzy-brown: #a67c52;      /* Earthy Brown */
+    --farmzy-text: #3e4a36;       /* Deep Green Text */
+    --white: #ffffff;
+}
+
+@keyframes zoomIn {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes slideDown {
+    0% {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+* { 
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0; 
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+}
+
+body { 
+    background-color: var(--farmzy-cream); 
+    color: var(--farmzy-text); 
+    display: flex; 
+    justify-content: center; 
+    min-height: 100vh; 
+}
+
+/* Mobile Container */
+#app-container {
+    width: 100%; 
+    max-width: 480px; 
+    background: var(--white); 
+    min-height: 100vh; 
+    position: relative; 
+    box-shadow: 0 0 20px rgba(62, 74, 54, 0.1);
+    padding-bottom: 60px;
+}
+
+
+
+/* Notification Overlay Styling */
+#notif-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.notif-content {
+    background: white;
+    width: 90%;
+    max-width: 400px;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+/* Branded Header */
+header {
+    /* Transparent white background */
+    background: rgba(255, 255, 255, 0.7); 
+    
+    /* The "Frosting" effect */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); /* For Safari support */
+    
+    /* Border and Shadow for depth */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    
+    padding: 12px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logo-img {
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+header h1 { 
+    font-size: 1.4rem; 
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    color: var(--farmzy-green);
+}
+
+/* Forms & Inputs */
+.auth-box, .section-box { 
+    padding: 20px; 
+}
+
+input, select, textarea {
+    width: 100%; 
+    padding: 12px; 
+    margin-bottom: 15px;
+    border: 1px solid #e0d8c8; 
+    border-radius: 10px; 
+    font-size: 1rem;
+    background-color: #fcfbf7;
+}
+
+input:focus {
+    outline: 2px solid var(--farmzy-green);
+    border-color: transparent;
+}
+
+/* Farmzy Branded Buttons */
+button {
+    width: 100%; 
+    padding: 14px; 
+    border: none; 
+    border-radius: 10px; 
+    background: var(--farmzy-green); 
+    color: white; 
+    font-weight: bold; 
+    cursor: pointer; 
+    font-size: 1rem;
+    transition: transform 0.1s, background 0.2s;
+}
+
+button:hover { 
+    background: var(--farmzy-dark); 
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+button.secondary { 
+    background: var(--farmzy-brown); 
+    margin-top: 10px; 
+}
+
+/* Cards & Inventory */
+.card {
+    background: var(--white); 
+    border: 1px solid #eee; 
+    border-left: 5px solid var(--farmzy-green); /* Branded accent */
+    border-radius: 14px;
+    padding: 15px; 
+    margin-bottom: 15px; 
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    animation: slideDown 0.6s ease-out;
+    animation-fill-mode: both;
+    transition: filter 0.3s ease;
+}
+
+.card:hover {
+    filter: drop-shadow(10px 10px 20px rgba(36, 36, 36, 0.5));
+}
+
+.crop-img { 
+    width: 100%; 
+    height: 160px; 
+    object-fit: cover; 
+    border-radius: 10px; 
+    margin-bottom: 12px; 
+    transition: filter 0.3s ease;
+}
+
+.crop-img:hover {
+    filter: drop-shadow(10px 10px 20px rgba(36, 36, 36, 0.5));
+}
+
+/* Status Badges */
+.status { 
+    padding: 5px 10px; 
+    border-radius: 6px; 
+    font-size: 0.75rem; 
+    font-weight: bold; 
+    text-transform: uppercase;
+}
+.status.coming_soon { background: var(--farmzy-brown); color: white; }
+.status.available { background: var(--farmzy-green); color: white; }
+.status.out_of_stock { background: #e74c3c; color: white; }
+
+/* Notifications */
+#notif-overlay {
+    display: none; 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%;
+    background: rgba(62, 74, 54, 0.6); 
+    z-index: 200; 
+    justify-content: center;
+}
+
+.notif-content {
+    background: var(--white); 
+    width: 90%; 
+    max-width: 400px; 
+    height: 80%;
+    margin-top: 40px; 
+    border-radius: 16px; 
+    padding: 20px; 
+    overflow-y: auto;
+}
+
+.bell-icon { 
+    font-size: 1.5rem; 
+    cursor: pointer; 
+    position: relative; 
+    color: var(--farmzy-green);
+}
+
+.badge {
+    position: absolute; 
+    top: -5px; 
+    right: -5px; 
+    background: #e74c3c;
+    color: white; 
+    border-radius: 50%; 
+    width: 18px; 
+    height: 18px; 
+    font-size: 11px;
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    border: 2px solid white;
+}
+
+/* Link & Text */
+.link { 
+    color: var(--farmzy-dark); 
+    text-decoration: underline; 
+    display: block; 
+    text-align: center; 
+    margin-top: 15px; 
+    font-weight: 500;
+}
+
+/* --- Farmzy Logo Animation --- */
+
+@keyframes sprout-grow {
+    0% { transform: scale(0.95); opacity: 0.8; }
+    50% { transform: scale(1.05); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.logo-img {
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+    /* This triggers the animation once for 0.8 seconds when the page loads */
+    animation: sprout-grow 0.8s ease-out forwards; 
+    border: 2px solid var(--farmzy-green);
+}
+
+/* Optional: Add a subtle hover effect to make the sprout "react" */
+.logo-container:hover .logo-img {
+    transform: rotate(10deg) scale(1.1);
+    transition: transform 0.3s ease;
+}
+
+/* --- Rest of your Brand Theme --- */
+
+:root {
+    --farmzy-green: #7eb356;
+    --farmzy-dark: #5a823d;
+    --farmzy-cream: #f4eee1;
+    --farmzy-brown: #a67c52;
+    --farmzy-text: #3e4a36;
+    --white: #ffffff;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+
+body { background-color: var(--farmzy-cream); color: var(--farmzy-text); display: flex; justify-content: center; min-height: 100vh; }
+
+#app-container {
+    width: 100%; max-width: 480px; background: var(--white); 
+    min-height: 100vh; position: relative; box-shadow: 0 0 20px rgba(62, 74, 54, 0.1);
+    padding-bottom: 60px;
+}
+
+header {
+    background: var(--white); color: var(--farmzy-green); padding: 12px 15px; 
+    display: flex; justify-content: space-between; align-items: center;
+    position: sticky; top: 0; z-index: 100; border-bottom: 3px solid var(--farmzy-green);
+}
+
+.logo-container { display: flex; align-items: center; gap: 8px; cursor: pointer; }
+
+header h1 { font-size: 1.4rem; font-weight: 800; letter-spacing: -0.5px; color: var(--farmzy-green); }
+
+/* Buttons and other elements remain the same as previous branding update */
+button {
+    width: 100%; padding: 14px; border: none; border-radius: 10px; 
+    background: var(--farmzy-green); color: white; font-weight: bold; 
+    cursor: pointer; font-size: 1rem; transition: background 0.2s;
+}
+button:hover { background: var(--farmzy-dark); }
+.hidden { display: none; }
+
+/* Truck Loading Animation */
+.loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(244, 238, 225, 0.95);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    opacity: 1;
+    transition: opacity 0.5s ease-out;
+}
+
+.loader.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.truckWrapper {
+    width: 200px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    align-items: center;
+    justify-content: flex-end;
+    overflow-x: hidden;
+}
+
+/* truck upper body */
+.truckBody {
+    width: 130px;
+    height: fit-content;
+    margin-bottom: 6px;
+    animation: motion 1s linear infinite;
+}
+
+/* truck suspension animation*/
+@keyframes motion {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(3px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+/* truck's tires */
+.truckTires {
+    width: 130px;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 10px 0px 15px;
+    position: absolute;
+    bottom: 0;
+}
+
+.truckTires svg {
+    width: 24px;
+}
+
+.road {
+    width: 100%;
+    height: 1.5px;
+    background-color: #282828;
+    position: relative;
+    bottom: 0;
+    align-self: flex-end;
+    border-radius: 3px;
+}
+
+.road::before {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 100%;
+    background-color: #282828;
+    right: -50%;
+    border-radius: 3px;
+    animation: roadAnimation 1.4s linear infinite;
+    border-left: 10px solid white;
+}
+
+.road::after {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 100%;
+    background-color: #282828;
+    right: -65%;
+    border-radius: 3px;
+    animation: roadAnimation 1.4s linear infinite;
+    border-left: 4px solid white;
+}
+
+.lampPost {
+    position: absolute;
+    bottom: 0;
+    right: -90%;
+    height: 90px;
+    animation: roadAnimation 1.4s linear infinite;
+}
+
+@keyframes roadAnimation {
+    0% {
+        transform: translateX(0px);
+    }
+    100% {
+        transform: translateX(-350px);
+    }
+}

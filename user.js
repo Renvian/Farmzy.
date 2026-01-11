@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // 1. Load Crops (Filters: Qty > 0 and Deadline > Now)
+// 1. Load Crops (Filters: Qty > 0 and Deadline > Now)
 async function loadCrops() {
     const now = new Date().toISOString();
     
@@ -44,19 +45,37 @@ async function loadCrops() {
         return;
     }
 
-    crops.forEach((crop, index) => {
-        const div = document.createElement('div');
-        div.className = 'card';
-        div.innerHTML = `
-            <img src="${crop.image_url}" class="crop-img">
-            <h3>${crop.name}</h3>
-            <span class="status ${crop.status}">${crop.status.replace('_', ' ')}</span>
-            <p>Price: ₹${crop.price} / ${crop.unit}</p>
-            <p><small>Qty left: ${crop.quantity} ${crop.unit}</small></p>
-            <button onclick="window.location.href='crop.html?id=${crop.id}'">View & Buy</button>
-        `;
-        container.appendChild(div);
-    });
+    // --- DELAYED CARD LOADING START ---
+    // This waits for 1 second (1000ms) before building the cards
+    setTimeout(() => {
+        
+        // Hide the truck loader as the cards begin to pop
+        const loader = document.querySelector('.loader');
+        if (loader) loader.classList.add('hidden');
+
+        crops.forEach((crop, index) => {
+            const div = document.createElement('div');
+            div.className = 'card';
+            
+            // This creates the staggered "one-by-one" pop-out effect
+            div.style.animationDelay = `${index * 0.1}s`; 
+
+            // Added a wrapper <div> for padding to fix the "cramped" look
+            div.innerHTML = `
+                <img src="${crop.image_url}" class="crop-img">
+                <div style="padding: 15px;">
+                    <h3 style="margin-bottom: 5px;">${crop.name}</h3>
+                    <span class="status ${crop.status}">${crop.status.replace('_', ' ')}</span>
+                    <p style="margin-top: 10px;">Price: ₹${crop.price} / ${crop.unit}</p>
+                    <p><small>Qty left: ${crop.quantity} ${crop.unit}</small></p>
+                    <button style="margin-top: 12px;" onclick="window.location.href='crop.html?id=${crop.id}'">View & Buy</button>
+                </div>
+            `;
+            container.appendChild(div);
+        });
+        
+    }, 1000); 
+    // --- DELAYED CARD LOADING END ---
 }
 
 // 2. Load Crop Details (The fix for access issues)

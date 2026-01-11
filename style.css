@@ -341,7 +341,7 @@ button:hover { background: var(--farmzy-dark); }
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(244, 238, 225, 0.95);
+    background: rgba(244, 238, 225,1);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -453,3 +453,4 @@ button:hover { background: var(--farmzy-dark); }
         transform: translateX(-350px);
     }
 }
+
